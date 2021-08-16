@@ -18,6 +18,64 @@
         "documentation": {}
     },
     {
+        "label": "cloudinary.models",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cloudinary.models",
+        "description": "cloudinary.models",
+        "detail": "cloudinary.models",
+        "documentation": {}
+    },
+    {
+        "label": "CloudinaryField",
+        "importPath": "cloudinary.models",
+        "description": "cloudinary.models",
+        "isExtraImport": true,
+        "detail": "cloudinary.models",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "django.db.models.deletion",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.db.models.deletion",
+        "description": "django.db.models.deletion",
+        "detail": "django.db.models.deletion",
+        "documentation": {}
+    },
+    {
         "label": "admin",
         "importPath": "django.contrib",
         "description": "django.contrib",
@@ -42,11 +100,11 @@
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "django.contrib.auth.models",
         "documentation": {}
     },
     {
@@ -125,12 +183,66 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "blog.migrations.0001_initial",
+        "description": "blog.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Post',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),",
+        "detail": "blog.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
         "label": "BlogConfig",
         "kind": 6,
         "importPath": "blog.apps",
         "description": "blog.apps",
         "peekOfCode": "class BlogConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'blog'",
         "detail": "blog.apps",
+        "documentation": {}
+    },
+    {
+        "label": "Post",
+        "kind": 6,
+        "importPath": "blog.models",
+        "description": "blog.models",
+        "peekOfCode": "class Post(models.Model):\n    title = models.CharField(max_length=200, unique=True)\n    slug = models.SlugField(max_length=200, unique=True)\n    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_post')\n    updated_on = models.DateTimeField(auto_now=True)\n    content = models.TextField()\n    featured_image = CloudinaryField('image', default='placeholder')\n    excerpt = models.TextField(blank=True)\n    created_on = models.DateTimeField(auto_now_add=True)\n    status = models.IntegerField(choices=STATUS, default=0)",
+        "detail": "blog.models",
+        "documentation": {}
+    },
+    {
+        "label": "Meta",
+        "kind": 6,
+        "importPath": "blog.models",
+        "description": "blog.models",
+        "peekOfCode": "class Meta:\n    ordering = ['-created_on']\ndef __str__(self):\n    return self.title\ndef number_of_likes(self):\n    return self.likes.count()\nclass Comment(models.Model):\n    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')\n    name = models.CharField(max_length=80)\n    email = models.EmailField()",
+        "detail": "blog.models",
+        "documentation": {}
+    },
+    {
+        "label": "Comment",
+        "kind": 6,
+        "importPath": "blog.models",
+        "description": "blog.models",
+        "peekOfCode": "class Comment(models.Model):\n    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')\n    name = models.CharField(max_length=80)\n    email = models.EmailField()\n    body = models.TextField()\n    created_on = models.DateTimeField(auto_now_add=True)\n    approved = models.BooleanField(default=False)\n    class Meta:\n        ordering = ['created_on']\n    def __str__(self):",
+        "detail": "blog.models",
+        "documentation": {}
+    },
+    {
+        "label": "number_of_likes",
+        "kind": 2,
+        "importPath": "blog.models",
+        "description": "blog.models",
+        "peekOfCode": "def number_of_likes(self):\n    return self.likes.count()\nclass Comment(models.Model):\n    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')\n    name = models.CharField(max_length=80)\n    email = models.EmailField()\n    body = models.TextField()\n    created_on = models.DateTimeField(auto_now_add=True)\n    approved = models.BooleanField(default=False)\n    class Meta:",
+        "detail": "blog.models",
+        "documentation": {}
+    },
+    {
+        "label": "STATUS",
+        "kind": 5,
+        "importPath": "blog.models",
+        "description": "blog.models",
+        "peekOfCode": "STATUS = ((0, 'Draft'), (1, 'Published'))\n# Create your models here.\nclass Post(models.Model):\n    title = models.CharField(max_length=200, unique=True)\n    slug = models.SlugField(max_length=200, unique=True)\n    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_post')\n    updated_on = models.DateTimeField(auto_now=True)\n    content = models.TextField()\n    featured_image = CloudinaryField('image', default='placeholder')\n    excerpt = models.TextField(blank=True)",
+        "detail": "blog.models",
         "documentation": {}
     },
     {
