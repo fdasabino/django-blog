@@ -59,6 +59,14 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -92,6 +100,14 @@
         "documentation": {}
     },
     {
+        "label": "SummernoteModelAdmin",
+        "importPath": "django_summernote.admin",
+        "description": "django_summernote.admin",
+        "isExtraImport": true,
+        "detail": "django_summernote.admin",
+        "documentation": {}
+    },
+    {
         "label": "AppConfig",
         "importPath": "django.apps",
         "description": "django.apps",
@@ -116,11 +132,43 @@
         "documentation": {}
     },
     {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
         "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
         "isExtraImport": true,
         "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "generic",
+        "importPath": "django.views",
+        "description": "django.views",
+        "isExtraImport": true,
+        "detail": "django.views",
         "documentation": {}
     },
     {
@@ -146,14 +194,6 @@
         "importPath": "dj_database_url",
         "description": "dj_database_url",
         "detail": "dj_database_url",
-        "documentation": {}
-    },
-    {
-        "label": "path",
-        "importPath": "django.urls",
-        "description": "django.urls",
-        "isExtraImport": true,
-        "detail": "django.urls",
         "documentation": {}
     },
     {
@@ -192,6 +232,33 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "blog.migrations.0002_alter_post_options",
+        "description": "blog.migrations.0002_alter_post_options",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog', '0001_initial'),\n    ]\n    operations = [\n        migrations.AlterModelOptions(\n            name='post',\n            options={'ordering': ['-created_on']},\n        ),\n    ]",
+        "detail": "blog.migrations.0002_alter_post_options",
+        "documentation": {}
+    },
+    {
+        "label": "PostAdmin",
+        "kind": 6,
+        "importPath": "blog.admin",
+        "description": "blog.admin",
+        "peekOfCode": "class PostAdmin(SummernoteModelAdmin):\n    list_display = ('title', 'slug', 'status', 'created_on')\n    search_fields = ['title', 'content']\n    list_filter = ('status', 'created_on')\n    prepopulated_fields = {'slug': ('title',)}\n    summernote_fields = ('content',)\n@admin.register(Comment)\nclass CommentAdmin(admin.ModelAdmin):\n    list_display = ('name', 'body', 'post', 'created_on', 'approved')\n    list_filter = ('approved', 'created_on')",
+        "detail": "blog.admin",
+        "documentation": {}
+    },
+    {
+        "label": "CommentAdmin",
+        "kind": 6,
+        "importPath": "blog.admin",
+        "description": "blog.admin",
+        "peekOfCode": "class CommentAdmin(admin.ModelAdmin):\n    list_display = ('name', 'body', 'post', 'created_on', 'approved')\n    list_filter = ('approved', 'created_on')\n    search_fields = ('name', 'email', 'body')\n    actions = ['approve_comments']\n    def approve_comments(self, request, queryset):\n        queryset.update(approved=True)",
+        "detail": "blog.admin",
+        "documentation": {}
+    },
+    {
         "label": "BlogConfig",
         "kind": 6,
         "importPath": "blog.apps",
@@ -210,29 +277,11 @@
         "documentation": {}
     },
     {
-        "label": "Meta",
-        "kind": 6,
-        "importPath": "blog.models",
-        "description": "blog.models",
-        "peekOfCode": "class Meta:\n    ordering = ['-created_on']\ndef __str__(self):\n    return self.title\ndef number_of_likes(self):\n    return self.likes.count()\nclass Comment(models.Model):\n    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')\n    name = models.CharField(max_length=80)\n    email = models.EmailField()",
-        "detail": "blog.models",
-        "documentation": {}
-    },
-    {
         "label": "Comment",
         "kind": 6,
         "importPath": "blog.models",
         "description": "blog.models",
         "peekOfCode": "class Comment(models.Model):\n    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')\n    name = models.CharField(max_length=80)\n    email = models.EmailField()\n    body = models.TextField()\n    created_on = models.DateTimeField(auto_now_add=True)\n    approved = models.BooleanField(default=False)\n    class Meta:\n        ordering = ['created_on']\n    def __str__(self):",
-        "detail": "blog.models",
-        "documentation": {}
-    },
-    {
-        "label": "number_of_likes",
-        "kind": 2,
-        "importPath": "blog.models",
-        "description": "blog.models",
-        "peekOfCode": "def number_of_likes(self):\n    return self.likes.count()\nclass Comment(models.Model):\n    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')\n    name = models.CharField(max_length=80)\n    email = models.EmailField()\n    body = models.TextField()\n    created_on = models.DateTimeField(auto_now_add=True)\n    approved = models.BooleanField(default=False)\n    class Meta:",
         "detail": "blog.models",
         "documentation": {}
     },
@@ -243,6 +292,24 @@
         "description": "blog.models",
         "peekOfCode": "STATUS = ((0, 'Draft'), (1, 'Published'))\n# Create your models here.\nclass Post(models.Model):\n    title = models.CharField(max_length=200, unique=True)\n    slug = models.SlugField(max_length=200, unique=True)\n    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_post')\n    updated_on = models.DateTimeField(auto_now=True)\n    content = models.TextField()\n    featured_image = CloudinaryField('image', default='placeholder')\n    excerpt = models.TextField(blank=True)",
         "detail": "blog.models",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "blog.urls",
+        "description": "blog.urls",
+        "peekOfCode": "urlpatterns = [\n    path('', views.PostList.as_view(), name='home')\n]",
+        "detail": "blog.urls",
+        "documentation": {}
+    },
+    {
+        "label": "PostList",
+        "kind": 6,
+        "importPath": "blog.views",
+        "description": "blog.views",
+        "peekOfCode": "class PostList(generic.ListView):\n    model = Post\n    queryset = Post.objects.filter(status=1).order_by(\"-created_on\")\n    template_name = \"index.html\"\n    paginate_by = 6",
+        "detail": "blog.views",
         "documentation": {}
     },
     {
@@ -259,7 +326,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nTEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = ['codestar-frank.herokuapp.com', '127.0.0.1']\n# Application definition",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nTEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -268,7 +335,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = ['codestar-frank.herokuapp.com', '127.0.0.1']\n# Application definition\nINSTALLED_APPS = [",
+        "peekOfCode": "TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -277,7 +344,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "SECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = ['codestar-frank.herokuapp.com', '127.0.0.1']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "peekOfCode": "SECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -286,7 +353,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = ['codestar-frank.herokuapp.com', '127.0.0.1']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -295,7 +362,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "ALLOWED_HOSTS = ['codestar-frank.herokuapp.com', '127.0.0.1']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',\n    'django.contrib.staticfiles',",
+        "peekOfCode": "ALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',\n    'django.contrib.staticfiles',",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -304,7 +371,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',\n    'django.contrib.staticfiles',\n    'cloudinary',\n    'blog',",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',\n    'django.contrib.staticfiles',\n    'cloudinary',\n    'django_summernote',",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -313,7 +380,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\nROOT_URLCONF = 'codestar.urls'",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\nROOT_URLCONF = 'codestar.urls'",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -349,7 +416,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "DATABASES = {\n    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))\n}\n# Password validation\n# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {",
+        "peekOfCode": "DATABASES = {\n    'default': dj_database_url.parse(os.environ.get(\"DATABASE_URL\"))\n}\n# Password validation\n# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -367,7 +434,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nTIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]",
+        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nTIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\nMEDIA_URL = '/media/'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\nSTATIC_URL = '/static/'",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -376,7 +443,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "TIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')",
+        "peekOfCode": "TIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\nMEDIA_URL = '/media/'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -385,7 +452,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nMEDIA = '/media'",
+        "peekOfCode": "USE_I18N = True\nUSE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\nMEDIA_URL = '/media/'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -394,7 +461,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "USE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nMEDIA = '/media'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'",
+        "peekOfCode": "USE_L10N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\nMEDIA_URL = '/media/'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]\nSTATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -403,52 +470,16 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nMEDIA = '/media'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\n# Default primary key field type",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/3.2/howto/static-files/\nMEDIA_URL = '/media/'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]\nSTATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')\n# Default primary key field type",
         "detail": "codestar.settings",
         "documentation": {}
     },
     {
-        "label": "STATIC_URL",
+        "label": "MEDIA_URL",
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "STATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nMEDIA = '/media'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
-        "detail": "codestar.settings",
-        "documentation": {}
-    },
-    {
-        "label": "STATICFILES_STORAGE",
-        "kind": 5,
-        "importPath": "codestar.settings",
-        "description": "codestar.settings",
-        "peekOfCode": "STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nMEDIA = '/media'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
-        "detail": "codestar.settings",
-        "documentation": {}
-    },
-    {
-        "label": "STATICFILES_DIRS",
-        "kind": 5,
-        "importPath": "codestar.settings",
-        "description": "codestar.settings",
-        "peekOfCode": "STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]\nSTATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nMEDIA = '/media'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
-        "detail": "codestar.settings",
-        "documentation": {}
-    },
-    {
-        "label": "STATIC_ROOT",
-        "kind": 5,
-        "importPath": "codestar.settings",
-        "description": "codestar.settings",
-        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')\nMEDIA = '/media'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
-        "detail": "codestar.settings",
-        "documentation": {}
-    },
-    {
-        "label": "MEDIA",
-        "kind": 5,
-        "importPath": "codestar.settings",
-        "description": "codestar.settings",
-        "peekOfCode": "MEDIA = '/media'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "MEDIA_URL = '/media/'\nDEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]\nSTATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -457,7 +488,34 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'\nSTATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]\nSTATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "codestar.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "codestar.settings",
+        "description": "codestar.settings",
+        "peekOfCode": "STATIC_URL = '/static/'\nSTATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]\nSTATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "codestar.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_STORAGE",
+        "kind": 5,
+        "importPath": "codestar.settings",
+        "description": "codestar.settings",
+        "peekOfCode": "STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'\nSTATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]\nSTATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "codestar.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "codestar.settings",
+        "description": "codestar.settings",
+        "peekOfCode": "STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]\nSTATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -475,7 +533,7 @@
         "kind": 5,
         "importPath": "codestar.urls",
         "description": "codestar.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('summernote/', include('django_summernote.urls')),\n    path('', include('blog.urls'), name='blog_urls'),\n]",
         "detail": "codestar.urls",
         "documentation": {}
     },
