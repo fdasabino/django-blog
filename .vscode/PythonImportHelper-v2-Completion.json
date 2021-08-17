@@ -116,6 +116,22 @@
         "documentation": {}
     },
     {
+        "label": "fields",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "forms",
+        "importPath": "django",
+        "description": "django",
+        "isExtraImport": true,
+        "detail": "django",
+        "documentation": {}
+    },
+    {
         "label": "User",
         "importPath": "django.contrib.auth.models",
         "description": "django.contrib.auth.models",
@@ -164,11 +180,43 @@
         "documentation": {}
     },
     {
+        "label": "get_object_or_404",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "reverse",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
         "label": "generic",
         "importPath": "django.views",
         "description": "django.views",
         "isExtraImport": true,
         "detail": "django.views",
+        "documentation": {}
+    },
+    {
+        "label": "View",
+        "importPath": "django.views",
+        "description": "django.views",
+        "isExtraImport": true,
+        "detail": "django.views",
+        "documentation": {}
+    },
+    {
+        "label": "HttpResponseRedirect",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
         "documentation": {}
     },
     {
@@ -188,12 +236,36 @@
         "documentation": {}
     },
     {
+        "label": "constants",
+        "importPath": "django.contrib.messages",
+        "description": "django.contrib.messages",
+        "isExtraImport": true,
+        "detail": "django.contrib.messages",
+        "documentation": {}
+    },
+    {
         "label": "dj_database_url",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "dj_database_url",
         "description": "dj_database_url",
         "detail": "dj_database_url",
+        "documentation": {}
+    },
+    {
+        "label": "ERROR",
+        "importPath": "django.core.checks.messages",
+        "description": "django.core.checks.messages",
+        "isExtraImport": true,
+        "detail": "django.core.checks.messages",
+        "documentation": {}
+    },
+    {
+        "label": "WARNING",
+        "importPath": "django.core.checks.messages",
+        "description": "django.core.checks.messages",
+        "isExtraImport": true,
+        "detail": "django.core.checks.messages",
         "documentation": {}
     },
     {
@@ -268,6 +340,15 @@
         "documentation": {}
     },
     {
+        "label": "CommentForm",
+        "kind": 6,
+        "importPath": "blog.forms",
+        "description": "blog.forms",
+        "peekOfCode": "class CommentForm(forms.ModelForm):\n    class Meta:\n        model = Comment\n        fields = ('body',)",
+        "detail": "blog.forms",
+        "documentation": {}
+    },
+    {
         "label": "Post",
         "kind": 6,
         "importPath": "blog.models",
@@ -299,7 +380,7 @@
         "kind": 5,
         "importPath": "blog.urls",
         "description": "blog.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', views.PostList.as_view(), name='home')\n]",
+        "peekOfCode": "urlpatterns = [\n    path('', views.PostList.as_view(), name='home'),\n    path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),\n    path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),\n]",
         "detail": "blog.urls",
         "documentation": {}
     },
@@ -308,7 +389,25 @@
         "kind": 6,
         "importPath": "blog.views",
         "description": "blog.views",
-        "peekOfCode": "class PostList(generic.ListView):\n    model = Post\n    queryset = Post.objects.filter(status=1).order_by(\"-created_on\")\n    template_name = \"index.html\"\n    paginate_by = 6",
+        "peekOfCode": "class PostList(generic.ListView):\n    model = Post\n    queryset = Post.objects.filter(status=1).order_by(\"-created_on\")\n    template_name = \"index.html\"\n    paginate_by = 6\nclass PostDetail(View):\n    def get(self, request, slug, *args, **kwargs):\n        queryset = Post.objects.filter(status=1)\n        post = get_object_or_404(queryset, slug=slug)\n        comments = post.comments.filter(approved=True).order_by(\"-created_on\")",
+        "detail": "blog.views",
+        "documentation": {}
+    },
+    {
+        "label": "PostDetail",
+        "kind": 6,
+        "importPath": "blog.views",
+        "description": "blog.views",
+        "peekOfCode": "class PostDetail(View):\n    def get(self, request, slug, *args, **kwargs):\n        queryset = Post.objects.filter(status=1)\n        post = get_object_or_404(queryset, slug=slug)\n        comments = post.comments.filter(approved=True).order_by(\"-created_on\")\n        liked = False\n        if post.likes.filter(id=self.request.user.id).exists():\n            liked = True\n        return render(\n            request,",
+        "detail": "blog.views",
+        "documentation": {}
+    },
+    {
+        "label": "PostLike",
+        "kind": 6,
+        "importPath": "blog.views",
+        "description": "blog.views",
+        "peekOfCode": "class PostLike(View):\n    def post(self, request, slug, *args, **kwargs):\n        post = get_object_or_404(Post, slug=slug)\n        if post.likes.filter(id=request.user.id).exists():\n            post.likes.remove(request.user)\n        else:\n            post.likes.add(request.user)\n        return HttpResponseRedirect(reverse('post_detail', args=[slug]))",
         "detail": "blog.views",
         "documentation": {}
     },
@@ -326,7 +425,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nTEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nTEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -335,7 +434,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [",
+        "peekOfCode": "TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -344,7 +443,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "SECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "peekOfCode": "SECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -353,7 +452,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',",
+        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -371,7 +470,52 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',\n    'django.contrib.staticfiles',\n    'cloudinary',\n    'django_summernote',",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',\n    'django.contrib.staticfiles',\n    'django.contrib.sites',\n    'allauth',",
+        "detail": "codestar.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SITE_ID",
+        "kind": 5,
+        "importPath": "codestar.settings",
+        "description": "codestar.settings",
+        "peekOfCode": "SITE_ID = 1\nLOGIN_REDIRECT_URL = '/'\nLOGOUT_REDIRECT_URL = '/'\nMESSAGE_TAGS = {\n    messages.DEBUG: 'alert-info',\n    messages.INFO: 'alert-info',\n    messages.SUCCESS: 'alert-success',\n    messages.WARNING: 'alert-warning',\n    messages.ERROR: 'alert-danger',\n}",
+        "detail": "codestar.settings",
+        "documentation": {}
+    },
+    {
+        "label": "LOGIN_REDIRECT_URL",
+        "kind": 5,
+        "importPath": "codestar.settings",
+        "description": "codestar.settings",
+        "peekOfCode": "LOGIN_REDIRECT_URL = '/'\nLOGOUT_REDIRECT_URL = '/'\nMESSAGE_TAGS = {\n    messages.DEBUG: 'alert-info',\n    messages.INFO: 'alert-info',\n    messages.SUCCESS: 'alert-success',\n    messages.WARNING: 'alert-warning',\n    messages.ERROR: 'alert-danger',\n}\nCRISPY_TEMPLATE_PACK = 'bootstrap4'",
+        "detail": "codestar.settings",
+        "documentation": {}
+    },
+    {
+        "label": "LOGOUT_REDIRECT_URL",
+        "kind": 5,
+        "importPath": "codestar.settings",
+        "description": "codestar.settings",
+        "peekOfCode": "LOGOUT_REDIRECT_URL = '/'\nMESSAGE_TAGS = {\n    messages.DEBUG: 'alert-info',\n    messages.INFO: 'alert-info',\n    messages.SUCCESS: 'alert-success',\n    messages.WARNING: 'alert-warning',\n    messages.ERROR: 'alert-danger',\n}\nCRISPY_TEMPLATE_PACK = 'bootstrap4'\nMIDDLEWARE = [",
+        "detail": "codestar.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MESSAGE_TAGS",
+        "kind": 5,
+        "importPath": "codestar.settings",
+        "description": "codestar.settings",
+        "peekOfCode": "MESSAGE_TAGS = {\n    messages.DEBUG: 'alert-info',\n    messages.INFO: 'alert-info',\n    messages.SUCCESS: 'alert-success',\n    messages.WARNING: 'alert-warning',\n    messages.ERROR: 'alert-danger',\n}\nCRISPY_TEMPLATE_PACK = 'bootstrap4'\nMIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',",
+        "detail": "codestar.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CRISPY_TEMPLATE_PACK",
+        "kind": 5,
+        "importPath": "codestar.settings",
+        "description": "codestar.settings",
+        "peekOfCode": "CRISPY_TEMPLATE_PACK = 'bootstrap4'\nMIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -380,7 +524,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\nROOT_URLCONF = 'codestar.urls'",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\nROOT_URLCONF = 'codestar.urls'",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -533,7 +677,7 @@
         "kind": 5,
         "importPath": "codestar.urls",
         "description": "codestar.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('summernote/', include('django_summernote.urls')),\n    path('', include('blog.urls'), name='blog_urls'),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('summernote/', include('django_summernote.urls')),\n    path('', include('blog.urls'), name='blog_urls'),\n    path('accounts/', include('allauth.urls')),\n]",
         "detail": "codestar.urls",
         "documentation": {}
     },

@@ -24,8 +24,11 @@
    "workbench.colorTheme": "Visual Studio Dark",
    "editor.defaultFormatter": "HookyQR.beautify",
    "cSpell.ignoreWords": [
+      "blogpost",
       "cloudinary",
       "forloop",
+      "id",
+      "socialaccount",
       "url"
    ]
 }
