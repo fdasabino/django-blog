@@ -425,7 +425,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nTEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nX_FRAME_OPTIONS = 'SAMEORIGIN'\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nTEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nX_FRAME_OPTIONS = 'SAMEORIGIN'\nALLOWED_HOSTS = [\"codestar-frank.herokuapp.com\", \"localhost\", \"127.0.0.1\"]",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -434,7 +434,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nX_FRAME_OPTIONS = 'SAMEORIGIN'\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition",
+        "peekOfCode": "TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nX_FRAME_OPTIONS = 'SAMEORIGIN'\nALLOWED_HOSTS = [\"codestar-frank.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -443,7 +443,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "SECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nX_FRAME_OPTIONS = 'SAMEORIGIN'\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',",
+        "peekOfCode": "SECRET_KEY = os.environ.get('SECRET_KEY')\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nX_FRAME_OPTIONS = 'SAMEORIGIN'\nALLOWED_HOSTS = [\"codestar-frank.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -452,7 +452,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "DEBUG = False\nX_FRAME_OPTIONS = 'SAMEORIGIN'\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',",
+        "peekOfCode": "DEBUG = False\nX_FRAME_OPTIONS = 'SAMEORIGIN'\nALLOWED_HOSTS = [\"codestar-frank.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -461,7 +461,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "X_FRAME_OPTIONS = 'SAMEORIGIN'\nALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',",
+        "peekOfCode": "X_FRAME_OPTIONS = 'SAMEORIGIN'\nALLOWED_HOSTS = [\"codestar-frank.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',",
         "detail": "codestar.settings",
         "documentation": {}
     },
@@ -470,7 +470,7 @@
         "kind": 5,
         "importPath": "codestar.settings",
         "description": "codestar.settings",
-        "peekOfCode": "ALLOWED_HOSTS = [\"mb2test.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',\n    'django.contrib.staticfiles',",
+        "peekOfCode": "ALLOWED_HOSTS = [\"codestar-frank.herokuapp.com\", \"localhost\", \"127.0.0.1\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'cloudinary_storage',\n    'django.contrib.staticfiles',",
         "detail": "codestar.settings",
         "documentation": {}
     },
